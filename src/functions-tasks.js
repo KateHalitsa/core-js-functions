@@ -71,7 +71,7 @@ function getArgumentsCount(funcs) {
  *
  */
 function getPowerFunction(exponent) {
-  return function (numb) {
+  return function power(numb) {
     return numb ** exponent;
   };
 }
@@ -91,7 +91,7 @@ function getPowerFunction(exponent) {
  */
 function getPolynom(...coefficients) {
   if (coefficients.length === 0) return null;
-  return function (x) {
+  return function y(x) {
     let polynom = 0;
     for (let i = 0; i < coefficients.length; i += 1) {
       const degree = coefficients.length - i - 1;
@@ -118,7 +118,7 @@ function getPolynom(...coefficients) {
 function memoize(func) {
   const mem = func();
 
-  return function () {
+  return function memoizer() {
     return mem;
   };
 }
@@ -176,7 +176,7 @@ function retry(func, attempts) {
  *
  */
 function logger(func, logFunc) {
-  return function (...args) {
+  return function resultLog(...args) {
     const { name } = func;
     const message = `${name}(${args.map((arg) => JSON.stringify(arg)).join(',')})`;
 
@@ -205,7 +205,7 @@ function logger(func, logFunc) {
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
 function partialUsingArguments(fn, ...args) {
-  return function (...args2) {
+  return function fun(...args2) {
     const allArguments = [...args, ...(Array.isArray(args2) ? args2 : [])];
     return fn(...allArguments);
   };
@@ -230,7 +230,7 @@ function partialUsingArguments(fn, ...args) {
  */
 function getIdGeneratorFunction(startFrom) {
   let start = startFrom - 1;
-  return function () {
+  return function getId() {
     start += 1;
     return start;
   };
